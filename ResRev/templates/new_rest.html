@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+	body {margin:0;}
+
+	font-family: Arial;
+	}
+
+	* {
+	box-sizing: border-box;
+	}
+
+	fieldset {
+  display: block;
+  margin-left: 10px;
+  margin-right: 2px;
+  padding-top: 0.35em;
+  padding-bottom: 0.625em;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+  border: 2px groove (internal value);
+  width:300px;
+	font-size:18px;
+	}
+
+	.button {
+	  background-color: #4CAF50; /* Green */
+	  border: none;
+	  color: white;
+	  padding: 16px 32px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  font-size: 16px;
+		margin-left: 10px;
+	  margin-right: 2px;
+	  -webkit-transition-duration: 0.4s; /* Safari */
+	  transition-duration: 0.4s;
+	  cursor: pointer;
+	}
+	.button1 {
+	  background-color: white;
+	  color: black;
+	  border: 2px solid #000000;
+		position: relative;
+	}
+
+	.button1:hover {
+	  background-color: #000000;
+	  color: white;
+	}
+
+	ul {
+	  list-style-type: none;
+	  margin: 0;
+	  padding: 0;
+	  overflow: hidden;
+	  background-color: black	;
+	  position: fixed;
+	  top: 0;
+	  width: 100%;
+	}
+
+	li {
+	  float: left;
+	}
+
+	li a {
+	  display: block;
+	  color: white;
+	  text-align: center;
+	  padding: 14px 16px;
+	  text-decoration: none;
+	}
+
+	.rightmenu {
+	  background-color: green;
+	}
+	</style>
+</head>
+	<body>
+
+
+	<ul>
+	  <li><a>ResRev</a></li>
+		<li style="float:right"><a class="rightmenu" href="{% url 'ResRev:logout' %}">LogOut</a></li>
+		{% if user.is_authenticated %}
+			<li style="float:right"><a class="rightmenu" href="{% url 'ResRev:logout' %}">LogOut</a></li>
+		{% else %}
+			<li style="float:right"><a class="rightmenu" href="{% url 'ResRev:frontPage' %}">LogIn</a></li>
+		{% endif %}
+	</ul>
+
+		<br><br><h2>{{ err }}</h2>
+		<br><br>
+		<fieldset>
+		 <legend><h2>Add Restaurant</h2></legend>
+		 <form action="{% url 'ResRev:add_rest' %}" method="post">
+			 {% csrf_token %}
+			 <input type="text" name="name" placeholder="Name"><br><br>
+			 <input type="text" name="descrip" placeholder="Description"><br><br>
+			 <input type="text" name="cate" placeholder="Category"><br><br>
+			 <input type="text" name="contact" placeholder="Contact"><br><br>
+			 <input type="submit" value="Submit">
+		 </form>
+		</fieldset>
+	<form>
+			<br><br>recommend Menu: <br><br>
+			<input type="text" name="rec1" placeholder="recommend Menu 1"><br><br>
+			<input type="text" name="rec2" placeholder="recommend Menu 1"><br><br>
+			<input type="text" name="rec3" placeholder="recommend Menu 1"><br><br>
+	</form>
+	</body>
+</html>
