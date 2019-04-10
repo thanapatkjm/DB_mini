@@ -110,14 +110,15 @@
 		 Desription : {{ rest_info.description }}<br>
 		 Category : {{ rest_info.category }}<br>
 		 Rating : {{ rest_info.rating }}<br>
-		 Raing From Good Reviewer : {{ rest_info.g_rating }}<br>
+		 Rating From Good Reviewer : {{ rest_info.g_rating }}<br>
 		</fieldset>
 		{% if list_review %}
 			<h1>Review</h1>
 			{% for review in list_review %}
 				<fieldset>
 				 <legend><h3>Review {{ forloop.counter }}</h2></legend>
-					User : {{ review.reviewer.name }}<br>
+					User : {{ review.reviewer.user }}<br>
+					Class : {{ review.reviewer.clas }}<br>
 					comment : {{ review.comment }}<br>
 					rating : {{ review.rating }}<br>
 					like : {{ review.like }}<br>

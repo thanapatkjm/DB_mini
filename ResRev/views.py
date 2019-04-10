@@ -4,6 +4,7 @@ from .models import Reviewer, Restaurant, Review
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
+from django.urls import reverse
 
 from django.http import HttpResponse, HttpResponseRedirect
 
@@ -56,12 +57,13 @@ def restau(request,rest_id):
 def add_review(request,rest_id):
     if(request.user.get_username() and request.POST['Rating']):
         rest = Restaurant.objects.get(id=rest_id)
-        US = Reviewer.objects.get(user=request.user.get_username())
-        Review.objects.create(restau=rest,reviewer=US,comment=request.POST['Rcomm'],rating=request.POST['Rating'])
+        US = User.objects.get(username=request.user.get_username())
+        Rv = Reviewer.objects.get(user=US)
+        Review.objects.create(restau=rest,reviewer=Rv,comment=request.POST['comment'],rating=request.POST['Rating'])
         cal_rating = Review.objects.filter(restau=rest_id)
         rate = 0
         for i in range (Review.objects.filter(restau=rest_id,).count()) :
-            rate = rate + fil[i].rating
+            rate = rate + cal_rating[i].rating
         rest.rating=rate/Review.objects.filter(restau=rest_id,).count()
         rest.save()
         return HttpResponseRedirect(reverse('ResRev:restau', args=(rest_id,)))

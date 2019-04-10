@@ -7,7 +7,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 class Reviewer(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
     like = models.IntegerField(default=0)
-    clas = models.TextField()
+    clas = models.TextField(default="Normal")
     description = models.TextField()
     contact = models.CharField(max_length=80)
     hours = models.IntegerField(default=0)
